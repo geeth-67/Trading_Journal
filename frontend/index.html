@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trading Journal Dashboard</title>
+</head>
+<body>
+    <h1>My Dashboard</h1>
+    <p id="status">Checking...</p>
+    
+    <button id="logoutBtn" style="display:none;">Logout</button>
+    <a href="pages/login.html" id="loginLink" style="display:none;">Login</a>
+
+    <script>
+        const token = localStorage.getItem("token");
+        if (token) {
+            document.getElementById("status").innerText = "You are logged in!";
+            document.getElementById("logoutBtn").style.display = "block";
+        } else {
+            document.getElementById("status").innerText = "You are NOT logged in.";
+            document.getElementById("loginLink").style.display = "block";
+        }
+
+        // Simple Logout Logic inline for checking
+        document.getElementById("logoutBtn").addEventListener("click", () => {
+            localStorage.removeItem("token");
+            window.location.reload();
+        });
+    </script>
+</body>
+</html>
