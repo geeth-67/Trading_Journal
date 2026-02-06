@@ -83,6 +83,25 @@ This will automatically:
 
 ---
 
+---
+
+### 📄 View logs
+
+```bash
+# View backend logs
+docker compose logs backend
+
+# Follow logs live
+docker compose logs -f backend
+
+# Last 50 lines
+docker compose logs --tail=50 backend
+```
+
+Or via: **Docker Desktop → Containers → trading_journal-backend-1 → Logs**
+
+---
+
 ## 2️⃣ Daily Development Guide
 
 Use this every day.
