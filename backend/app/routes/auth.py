@@ -14,6 +14,7 @@ from backend.app.services.email import email_service # Import Email Service
 
 router = APIRouter()
 
+
 @router.post("/register", response_model=UserResponse)
 def register(user: UserCreate, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.email == user.email).first()
@@ -28,6 +29,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db.refresh(new_user)
 
     return new_user
+
 
 @router.post("/login", response_model=Token)
 def login(user_credentials: UserLogin, db: Session = Depends(get_db)):
