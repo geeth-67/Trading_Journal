@@ -4,7 +4,7 @@ from sqlalchemy.sql import func
 import enum
 from backend.app.database import Base
 
-# Define Enum for clean data (dropdown choices)
+
 class TradeType(str, enum.Enum):
     LONG = "LONG"
     SHORT = "SHORT"
@@ -18,25 +18,20 @@ class Trade(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    
-    # Trade Details
-    symbol = Column(String, index=True, nullable=False)  # e.g., "BTCUSD"
-    trade_type = Column(String, nullable=False)  # LONG or SHORT
+
+    symbol = Column(String, index=True, nullable=False)
+    trade_type = Column(String, nullable=False)
     quantity = Column(Float, nullable=False)
-    
-    # Price Data
+
     entry_price = Column(Float, nullable=False)
-    exit_price = Column(Float, nullable=True)  # Can be empty if trade is still open
+    exit_price = Column(Float, nullable=True)
     stop_loss = Column(Float, nullable=True)
     take_profit = Column(Float, nullable=True)
     break_even = Column(Float, nullable=True)
-    
-    # Metadata
+
     notes = Column(String, nullable=True)
-    status = Column(String, default=TradeStatus.OPEN) # OPEN or CLOSED
+    status = Column(String, default=TradeStatus.OPEN)
     
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
-
-    # Relationship to User (Allows usage of trade.owner)
     owner = relationship("User", back_populates="trades")
