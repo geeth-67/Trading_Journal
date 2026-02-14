@@ -2,22 +2,20 @@ import httpx
 from backend.app.core.config import settings
 
 class EmailService:
+
     def __init__(self):
         self.api_key = settings.BREVO_API_KEY
         self.sender_email = settings.SENDER_EMAIL
         self.api_url = "https://api.brevo.com/v3/smtp/email"
 
     async def send_reset_email(self, to_email: str, reset_link: str):
-        """
-        Sends a password reset email using Brevo API.
-        """
+
         headers = {
             "accept": "application/json",
             "api-key": self.api_key,
             "content-type": "application/json"
         }
 
-        # The Email Content
         payload = {
             "sender": {"email": self.sender_email},
             "to": [{"email": to_email}],
@@ -34,7 +32,6 @@ class EmailService:
             """
         }
 
-        # Send the request asynchronously (don't block the app while waiting)
         async with httpx.AsyncClient() as client:
             response = await client.post(self.api_url, json=payload, headers=headers)
             
@@ -43,5 +40,4 @@ class EmailService:
                 return False
             return True
 
-# Create a single instance to use everywhere
 email_service = EmailService()
