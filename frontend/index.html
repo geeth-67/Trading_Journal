@@ -21,7 +21,6 @@
             document.getElementById("loginLink").style.display = "block";
         }
 
-        // Simple Logout Logic inline for checking
         document.getElementById("logoutBtn").addEventListener("click", () => {
             localStorage.removeItem("token");
             window.location.reload();
