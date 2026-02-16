@@ -45,6 +45,7 @@ Trading Journal is a comprehensive web application designed to help traders log,
     _(See [Docker Guide](DOCKER_GUIDE.md) for full variable list)_
 
 3.  **Run with Docker Compose**:
+
     ```bash
     docker-compose up --build
     ```
